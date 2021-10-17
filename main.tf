@@ -81,7 +81,7 @@ module "gke" {
       auto_upgrade       = true
       preemptible        = false
       initial_node_count = 2
-      service_account    = "tf-gke-plan-my-trip-766d@plan-my-trip-325720.iam.gserviceaccount.com"
+      service_account    = "plan-my-trip-deployment@plan-my-trip-325720.iam.gserviceaccount.com"
     },
   ]
 
