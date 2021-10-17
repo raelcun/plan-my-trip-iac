@@ -16,7 +16,7 @@ provider "kubernetes" {
 
 terraform {
   backend "gcs" {
-    bucket      = "plan-my-trip-terraform-state"
+    bucket      = "plan-my-trip-tf-state"
     prefix      = "terraform"
     credentials = "account.json"
   }
@@ -81,7 +81,7 @@ module "gke" {
       auto_upgrade       = true
       preemptible        = false
       initial_node_count = 2
-      service_account    = "plan-my-trip-deployment@plan-my-trip-325720.iam.gserviceaccount.com"
+      service_account    = "plan-my-trip-deployer@plan-my-trip-329316.iam.gserviceaccount.com"
     },
   ]
 
@@ -99,33 +99,5 @@ module "gke" {
     default-node-pool = {
       default-node-pool = true
     }
-  }
-
-  node_pools_metadata = {
-    all = {}
-
-    default-node-pool = {
-      node-pool-metadata-custom-value = "my-node-pool"
-    }
-  }
-
-  node_pools_taints = {
-    all = []
-
-    default-node-pool = [
-      {
-        key    = "default-node-pool"
-        value  = true
-        effect = "PREFER_NO_SCHEDULE"
-      },
-    ]
-  }
-
-  node_pools_tags = {
-    all = []
-
-    default-node-pool = [
-      "default-node-pool",
-    ]
   }
 }

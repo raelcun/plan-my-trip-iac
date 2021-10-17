@@ -1,6 +1,6 @@
 variable "project_id" {
   description = "The project ID to host the cluster in"
-  default     = "plan-my-trip-325720"
+  default     = "plan-my-trip-329316"
 }
 
 variable "cluster_name" {
