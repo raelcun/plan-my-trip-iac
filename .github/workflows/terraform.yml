@@ -1,0 +1,41 @@
+name: 'Terraform'
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+jobs:
+  terraform:
+    name: 'Terraform'
+    runs-on: ubuntu-latest
+    environment: production
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup Terraform
+      uses: hashicorp/setup-terraform@v1
+      with:
+        terraform_version: ~1.0.8
+
+    - name: Write account.json
+      run: echo '${{ secrets.SERVICE_ACCOUNT_KEY_JSON }}' > account.json
+
+    - name: Terraform Init
+      run: terraform init
+
+    - name: Terraform Validate
+      run: terraform validate -json
+
+    - name: Terraform Plan
+      run: terraform plan
+
+    - name: Terraform Apply
+      if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+      run: terraform apply -auto-approve
