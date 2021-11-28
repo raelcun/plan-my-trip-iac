@@ -129,7 +129,7 @@ resource "kubernetes_ingress" "plan-my-trip-ingress" {
         }
 
         path {
-          path = "/(index.html|static)"
+          path = "/*"
 
           backend {
             service_name = "frontend-service"
