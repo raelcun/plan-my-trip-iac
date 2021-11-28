@@ -127,6 +127,15 @@ resource "kubernetes_ingress" "plan-my-trip-ingress" {
             service_port = 8080
           }
         }
+
+        path {
+          path = "/"
+
+          backend {
+            service_name = "frontend-service"
+            service_port = 3000
+          }
+        }
       }
     }
   }
