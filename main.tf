@@ -101,3 +101,33 @@ module "gke" {
     }
   }
 }
+
+resource "kubernetes_ingress" "plan-my-trip-ingress" {
+  metadata {
+    name = "plan-my-trip-ingress"
+  }
+
+  spec {
+    rule {
+      http {
+        path {
+          path = "/rest/"
+          
+          backend {
+            service_name = "hello-world-rest-service"
+            service_port = 5050
+          }
+        }
+
+        path {
+          path = "/hello-node/"
+
+          backend {
+            service_name = "hello-node"
+            service_port = 8080
+          }
+        }
+      }
+    }
+  }
+}
