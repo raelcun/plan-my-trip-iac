@@ -69,17 +69,17 @@ module "gke" {
   node_pools = [
     {
       name               = "default-node-pool"
-      machine_type       = "e2-micro"
+      machine_type       = "e2-small"
       node_locations     = "us-central1-a"
       min_count          = 1
       max_count          = 5
       local_ssd_count    = 0
       disk_size_gb       = 50
       disk_type          = "pd-standard"
-      image_type         = "COS"
+      image_type         = "cos_containerd"
       auto_repair        = true
       auto_upgrade       = true
-      preemptible        = false
+      preemptible        = true
       initial_node_count = 2
       service_account    = "plan-my-trip-deployer@plan-my-trip-329316.iam.gserviceaccount.com"
     },
